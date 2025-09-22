@@ -81,4 +81,16 @@ static struct produto* buscaHash(Hash* ha, int codigo) {
     return NULL;
 }
 
+static void imprimir(Hash* ha){
+    int i;
+    for (i = 0; i < ha->TABLE_SIZE; i++) {
+        printf("[%d] ", i);
+        if (ha->itens[i] != NULL) {
+            struct produto* p = ha->itens[i];
+            printf("Codigo: %d | Nome: %s | Preco: %.2f | Quantidade: %d\n",
+                   p->codigo, p->nome, p->preco, p->quantidade);
+        }
+    }
+}
+
 #endif

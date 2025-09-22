@@ -14,6 +14,7 @@ int main() {
         printf("1 - Inserir produto\n");
         printf("2 - Buscar produto\n");
         printf("3 - Sair\n");
+        // printf("3 - Imprimir a tabela\n");
         printf("Escolha: ");
         scanf("%d", &opcao);
 
@@ -61,6 +62,9 @@ int main() {
                 }
                 break;
             }
+            // case 4:
+            //     imprimir(tabela);
+            //     break;
             case 3:
                 printf("Saindo...\n");
                 break;
