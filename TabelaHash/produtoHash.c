@@ -2,7 +2,7 @@
 
 int main() {
     int opcao;
-    Hash* tabela = criaHash(10);
+    Hash* tabela = criaHash(2);
 
     if (tabela == NULL) {
         printf("Erro ao criar a tabela hash!\n");
@@ -22,6 +22,14 @@ int main() {
                 struct produto p;
                 printf("Codigo: ");
                 scanf("%d", &p.codigo);
+                struct produto* encontrado = buscaHash(tabela, p.codigo);
+                if (encontrado!=NULL){
+                    printf("Código já inserido\n");
+                    system("cls");//Se for para windows
+                    system("clear");//Se for para Linux
+                    printf("digite novamente:");
+                    scanf("%d",&p.codigo);
+                }
                 printf("Nome: ");
                 scanf(" %[^\n]", p.nome);
                 printf("Preco: ");
