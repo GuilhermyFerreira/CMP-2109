@@ -42,7 +42,7 @@ int main() {
 
                 struct produto* encontrado = buscaHash(tabela, codigo);
                 if (encontrado != NULL) {
-                    printf("Produto encontrado:\n");
+                    printf("\nProduto encontrado:\n");
                     printf("Codigo: %d\nNome: %s\nPreco: %.2f\nQuantidade: %d\n",
                            encontrado->codigo,
                            encontrado->nome,

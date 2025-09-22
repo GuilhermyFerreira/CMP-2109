@@ -19,11 +19,7 @@ struct hash {
 
 typedef struct hash Hash;
 
-// -------------------------------------------------
-// Funções da tabela hash (implementação no header)
-// -------------------------------------------------
-
-static inline Hash* criaHash(int TABLE_SIZE) {
+static Hash* criaHash(int TABLE_SIZE) {
     Hash* ha = (Hash*) malloc(sizeof(Hash));
     if (ha != NULL) {
         ha->TABLE_SIZE = TABLE_SIZE;
@@ -39,7 +35,7 @@ static inline Hash* criaHash(int TABLE_SIZE) {
     return ha;
 }
 
-static inline void liberaHash(Hash* ha) {
+static void liberaHash(Hash* ha) {
     if (ha != NULL) {
         for (int i = 0; i < ha->TABLE_SIZE; i++) {
             if (ha->itens[i] != NULL)
@@ -50,7 +46,7 @@ static inline void liberaHash(Hash* ha) {
     }
 }
 
-static inline int insereHash(Hash* ha, struct produto prod) {
+static int insereHash(Hash* ha, struct produto prod) {
     if (ha == NULL || ha->qtd == ha->TABLE_SIZE)
         return 0;
 
@@ -72,7 +68,7 @@ static inline int insereHash(Hash* ha, struct produto prod) {
     return 0;
 }
 
-static inline struct produto* buscaHash(Hash* ha, int codigo) {
+static struct produto* buscaHash(Hash* ha, int codigo) {
     if (ha == NULL) return NULL;
     int chave = codigo % ha->TABLE_SIZE;
     for (int i = 0; i < ha->TABLE_SIZE; i++) {
