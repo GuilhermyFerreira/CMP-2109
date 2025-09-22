@@ -2,7 +2,7 @@
 
 int main() {
     int opcao;
-    Hash* tabela = criaHash(2);
+    Hash* tabela = criaHash(6);
 
     if (tabela == NULL) {
         printf("Erro ao criar a tabela hash!\n");
@@ -14,7 +14,7 @@ int main() {
         printf("1 - Inserir produto\n");
         printf("2 - Buscar produto\n");
         printf("3 - Sair\n");
-        // printf("3 - Imprimir a tabela\n");
+        printf("4 - Imprimir a tabela\n");
         printf("Escolha: ");
         scanf("%d", &opcao);
 
@@ -23,14 +23,15 @@ int main() {
                 struct produto p;
                 printf("Codigo: ");
                 scanf("%d", &p.codigo);
-                struct produto* encontrado = buscaHash(tabela, p.codigo);
-                if (encontrado!=NULL){
-                    printf("Código já inserido\n");
-                    system("cls");//Se for para windows
-                    system("clear");//Se for para Linux
-                    printf("digite novamente:");
-                    scanf("%d",&p.codigo);
-                }
+                // struct produto* encontrado = buscaHash(tabela, p.codigo);
+                // while(encontrado!=NULL){
+                //     system("cls");//Se for para windows
+                //     //system("clear");//Se for para Linux
+                //     printf("Código já inserido\n");
+                //     printf("digite novamente:");
+                //     scanf("%d",&p.codigo);
+                //     encontrado = buscaHash(tabela, p.codigo);
+                // }
                 printf("Nome: ");
                 scanf(" %[^\n]", p.nome);
                 printf("Preco: ");
@@ -62,9 +63,13 @@ int main() {
                 }
                 break;
             }
-            // case 4:
-            //     imprimir(tabela);
-            //     break;
+            case 4:
+                if(tabela==NULL){
+                    printf("Tabela vazia");
+                    break;
+                }
+                 imprimir(tabela);
+                 break;
             case 3:
                 printf("Saindo...\n");
                 break;

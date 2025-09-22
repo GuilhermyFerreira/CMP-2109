@@ -46,25 +46,33 @@ static void liberaHash(Hash* ha) {
     }
 }
 
+int sondagemquadratica(int pos, int i, int TABLE_SIZE){
+    pos = pos + 2*i + 5*1*1;
+    return (pos & 0x7FFFFFFF) % TABLE_SIZE;
+}
+int chavedivisao(int codigo, int TABLE_SIZE){
+    return(codigo & 0x7777777) & TABLE_SIZE;
+}
+
 static int insereHash(Hash* ha, struct produto prod) {
     if (ha == NULL || ha->qtd == ha->TABLE_SIZE)
         return 0;
 
-    int chave = prod.codigo % ha->TABLE_SIZE;
-    struct produto* novo = (struct produto*) malloc(sizeof(struct produto));
-    if (novo == NULL)
-        return 0;
-    *novo = prod;
+    int codigo=prod.codigo;
 
-    for (int i = 0; i < ha->TABLE_SIZE; i++) {
-        int index = (chave + i) % ha->TABLE_SIZE;
-        if (ha->itens[index] == NULL) {
-            ha->itens[index] = novo;
+    int i, pos, newpos;
+    pos=chavedivisao(codigo, ha->TABLE_SIZE);
+    for (i = 0; i < ha->TABLE_SIZE; i++) {
+        newpos = sondagemquadratica(pos, i, ha->TABLE_SIZE);
+        
+        if (ha->itens[newpos] == NULL) {
+            struct produto* novo = (struct produto*) malloc(sizeof(struct produto));
+            *novo = prod;
+            ha->itens[newpos] = novo;
             ha->qtd++;
             return 1;
         }
     }
-    free(novo);
     return 0;
 }
 
