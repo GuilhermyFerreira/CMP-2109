@@ -133,7 +133,7 @@ int insereHash_SemColisao(Hash *ha, struct produto p) {
         return 0;
     int pos = chaveDivisao(p.codigo, ha->TABLE_SIZE);
     if (ha->itens[pos] != NULL){
-        printf("Deu colisao, produto já alocado no indice\n");
+        printf("Erro, colisao\n");
         return 0;
     }
          

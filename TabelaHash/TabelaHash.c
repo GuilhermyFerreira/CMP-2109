@@ -11,7 +11,6 @@ int main() {
         printf("2 - Buscar produto\n");
         printf("3 - Imprimir a tabela\n");
         printf("4 - Inserir produto com colisao\n");
-        printf("5 - Buscar produto com colisao\n");
         printf("6 - Sair\n");
         printf("Escolha: ");
         scanf("%d", &opcao);
@@ -95,29 +94,12 @@ int main() {
             scanf("%f", &p.preco);
             printf("Quantidade: ");
             scanf("%d", &p.quantidade);
-            insereHash_SemColisao(tabela, p);
+            if(
+                insereHash_SemColisao(tabela, p));
+            else
+                printf("Tabela Cheia");
             break;
         }
-
-        case 5: {
-            if (tabela == NULL) {
-                printf("Erro: tabela NAO CRIADA\n");
-                break;
-            }
-            int codigo;
-            struct produto encontrado;
-            printf("Codigo para busca: ");
-            scanf("%d", &codigo);
-
-            if (buscaHash_SemColisao(tabela, codigo, &encontrado)) {
-                printf("Produto encontrado:\n");
-                imprimeProduto(encontrado);
-            } else {
-                printf("Produto nao encontrado.\n");
-            }
-            break;
-        }
-
         case 6:
             printf("Saindo...\n");
             break;
