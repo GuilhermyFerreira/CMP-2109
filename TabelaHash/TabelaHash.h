@@ -20,16 +20,17 @@ struct hash {
 typedef struct hash Hash;
 
 static Hash* criaHash(int TABLE_SIZE) {
-    Hash* ha = (Hash*) malloc(sizeof(Hash));
+    Hash* ha = (Hash *) malloc(sizeof(Hash));
+    int i;
     if (ha != NULL) {
         ha->TABLE_SIZE = TABLE_SIZE;
-        ha->qtd = 0;
         ha->itens = (struct produto**) malloc(TABLE_SIZE * sizeof(struct produto*));
         if (ha->itens == NULL) {
             free(ha);
             return NULL;
         }
-        for (int i = 0; i < ha->TABLE_SIZE; i++)
+        ha->qtd = 0;
+        for (i = 0; i < ha->TABLE_SIZE; i++)
             ha->itens[i] = NULL;
     }
     return ha;
@@ -55,8 +56,10 @@ int chavedivisao(int codigo, int TABLE_SIZE){
 }
 
 static int insereHash(Hash* ha, struct produto prod) {
-    if (ha == NULL || ha->qtd == ha->TABLE_SIZE)
+    if (ha == NULL || ha->qtd == ha->TABLE_SIZE){
         return 0;
+        printf("Erro");
+    }
 
     int codigo=prod.codigo;
 
@@ -76,15 +79,17 @@ static int insereHash(Hash* ha, struct produto prod) {
     return 0;
 }
 
-static struct produto* buscaHash(Hash* ha, int codigo) {
+static struct produto* buscaHash(Hash* ha, int codigo, struct produto *p) {
     if (ha == NULL) return NULL;
-    int chave = codigo % ha->TABLE_SIZE;
-    for (int i = 0; i < ha->TABLE_SIZE; i++) {
-        int index = (chave + i) % ha->TABLE_SIZE;
-        if (ha->itens[index] == NULL)
-            return NULL;
-        if (ha->itens[index]->codigo == codigo)
-            return ha->itens[index];
+    int newpos, i, pos;
+    for (i = 0; i < ha->TABLE_SIZE; i++) {
+        newpos= sondagemquadratica(pos,i,ha->TABLE_SIZE);
+        if(ha->itens[newpos]==NULL){
+            return 0;
+        }
+        if (ha->itens[newpos]->codigo==codigo){
+            *p=*(ha->itens[newpos]);
+        }
     }
     return NULL;
 }
