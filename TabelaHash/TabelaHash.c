@@ -1,18 +1,10 @@
 #include "TabelaHash.h"
 
 
-static void imprimeProduto(struct produto p)
-{
-    printf("Codigo: %d\nNome: %s\nPreco: %.2f\nQuantidade: %d\n",
-           p.codigo, p.nome, p.preco, p.quantidade);
-}
-
-int main()
-{
+int main() {
     int opcao;
     Hash *tabela = NULL;
-    do
-    {
+    do {
         printf("\n=== MENU ===\n");
         printf("0 - Para criar tabela\n");
         printf("1 - Inserir produto\n");
@@ -22,48 +14,32 @@ int main()
         printf("5 - Buscar produto com colisao\n");
         printf("6 - Sair\n");
         printf("Escolha: ");
-        if (scanf("%d", &opcao) != 1)
-        {
-            int c;
-            while ((c = getchar()) != '\n' && c != EOF)
-            {
-            }
-            printf("Entrada invalida.\n");
-            continue;
-        }
+        scanf("%d", &opcao);
 
-        switch (opcao)
-        {
-        case 0:
-        {
-            if (tabela != NULL)
-            {
+        switch (opcao) {
+        case 0: {
+            if (tabela != NULL) {
                 printf("Tabela ja foi criada\n");
                 break;
             }
             tabela = criaHash(10);
-            if (tabela == NULL)
-            {
+            if (tabela == NULL) {
                 printf("Erro ao criar a tabela hash!\n");
                 return 1;
-            }
-            else
+            } else
                 printf("Tabela criada\n");
             break;
         }
-        case 1:
-        {
-            if (tabela == NULL)
-            {
+        case 1: {
+            if (tabela == NULL) {
                 printf("Erro, tabela nao criada\n");
                 break;
             }
             struct produto p;
             printf("Codigo: ");
             scanf("%d", &p.codigo);
-
             printf("Nome: ");
-            scanf(" %[^\n]", p.nome);
+            scanf(" %29[^\n]", p.nome);
             printf("Preco: ");
             scanf("%f", &p.preco);
             printf("Quantidade: ");
@@ -72,13 +48,11 @@ int main()
             if (insereHash(tabela, p))
                 printf("Produto inserido com sucesso!\n");
             else
-                printf("Erro: tabela cheia ou falha na alocacao.\n");
+                printf("Erro: Posicao ocupada ou falha na alocacao.\n");
             break;
         }
-        case 2:
-        {
-            if (tabela == NULL)
-            {
+        case 2: {
+            if (tabela == NULL) {
                 printf("Erro, tabela nao criada\n");
                 break;
             }
@@ -87,76 +61,58 @@ int main()
             scanf("%d", &codigoBusca);
 
             struct produto *encontrado = buscaHash(tabela, codigoBusca);
-            if (encontrado != NULL)
-            {
+            if (encontrado != NULL) {
                 printf("\nProduto encontrado:\n");
                 printf("Codigo: %d\nNome: %s\nPreco: %.2f\nQuantidade: %d\n",
                        encontrado->codigo,
                        encontrado->nome,
                        encontrado->preco,
                        encontrado->quantidade);
-            }
-            else
-            {
+            } else {
                 printf("Produto nao encontrado!\n");
             }
             break;
         }
         case 3:
-            if (tabela == NULL)
-            {
+            if (tabela == NULL) {
                 printf("Tabela vazia\n");
                 break;
             }
             imprimir(tabela);
             break;
 
-        case 4:
-        {
-            if (tabela == NULL)
-            {
+        case 4: {
+            if (tabela == NULL) {
                 printf("Erro: tabela NAO CRIADA\n");
                 break;
             }
-
             struct produto p2;
             printf("Codigo: ");
             scanf("%d", &p2.codigo);
             printf("Nome: ");
-            scanf(" %[^\n]", p2.nome);
+            scanf(" %29[^\n]", p2.nome);
             printf("Preco: ");
             scanf("%f", &p2.preco);
             printf("Quantidade: ");
             scanf("%d", &p2.quantidade);
-
-            if (insereHash_SemColisao(tabela, p2))
-                printf("Produto inserido (sem colisao)!\n");
-            else
-                printf("Falha: posicao ocupada ou tabela cheia.\n");
             break;
         }
 
-        case 5:
-        {
-            if (tabela == NULL)
-            {
+        case 5: {
+            if (tabela == NULL) {
                 printf("Erro: tabela NAO CRIADA\n");
                 break;
             }
-
             int codigo;
             struct produto encontrado;
             printf("Codigo para busca: ");
             scanf("%d", &codigo);
 
-            if (buscaHash_SemColisao(tabela, codigo, &encontrado))
-            {
-                printf("Produto encontrado (sem colisao):\n");
+            if (buscaHash_SemColisao(tabela, codigo, &encontrado)) {
+                printf("Produto encontrado:\n");
                 imprimeProduto(encontrado);
-            }
-            else
-            {
-                printf("Produto nao encontrado (sem colisao).\n");
+            } else {
+                printf("Produto nao encontrado.\n");
             }
             break;
         }
@@ -168,7 +124,6 @@ int main()
         default:
             printf("Opcao invalida!\n");
         }
-
     } while (opcao != 6);
 
     liberaHash(tabela);
