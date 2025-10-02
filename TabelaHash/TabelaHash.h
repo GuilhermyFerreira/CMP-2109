@@ -129,11 +129,17 @@ int buscaHash_SemColisao(Hash *ha, int codigo, struct produto *p) {
 }
 
 int insereHash_SemColisao(Hash *ha, struct produto p) {
-    if (ha == NULL || ha->qtd == ha->TABLE_SIZE) return 0;
+    if (ha == NULL || ha->qtd == ha->TABLE_SIZE) 
+        return 0;
     int pos = chaveDivisao(p.codigo, ha->TABLE_SIZE);
-    if (ha->itens[pos] != NULL) return 0; 
+    if (ha->itens[pos] != NULL){
+        printf("Deu colisao, produto já alocado no indice\n");
+        return 0;
+    }
+         
     struct produto *novo = (struct produto *)malloc(sizeof(struct produto));
-    if (novo == NULL) return 0;
+    if (novo == NULL) 
+        return 0;
     *novo = p;
     ha->itens[pos] = novo;
     ha->qtd++;

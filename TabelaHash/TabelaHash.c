@@ -22,7 +22,7 @@ int main() {
                 printf("Tabela ja foi criada\n");
                 break;
             }
-            tabela = criaHash(10);
+            tabela = criaHash(5);
             if (tabela == NULL) {
                 printf("Erro ao criar a tabela hash!\n");
                 return 1;
@@ -86,15 +86,16 @@ int main() {
                 printf("Erro: tabela NAO CRIADA\n");
                 break;
             }
-            struct produto p2;
+            struct produto p;
             printf("Codigo: ");
-            scanf("%d", &p2.codigo);
+            scanf("%d", &p.codigo);
             printf("Nome: ");
-            scanf(" %29[^\n]", p2.nome);
+            scanf(" %29[^\n]", p.nome);
             printf("Preco: ");
-            scanf("%f", &p2.preco);
+            scanf("%f", &p.preco);
             printf("Quantidade: ");
-            scanf("%d", &p2.quantidade);
+            scanf("%d", &p.quantidade);
+            insereHash_SemColisao(tabela, p);
             break;
         }
 
