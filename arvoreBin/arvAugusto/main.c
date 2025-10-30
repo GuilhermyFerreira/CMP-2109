@@ -86,7 +86,6 @@ int main() {
 
         case 7:
             printf("Saindo...\n");
-            // BOA PRÁTICA: se sair sem liberar antes, libera agora
             if (criada) {
                 libera_ArvBin(arvore);
             }
