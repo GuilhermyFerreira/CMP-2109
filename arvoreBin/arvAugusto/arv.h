@@ -108,12 +108,7 @@ void posOrdem_NO(NO *no) {
     printf("%d ", no->info);
 }
 
-/* =============== LIBERAR A ÁRVORE (do PDF) =============== */
-/* libera_NO:
-   - Vai liberar (free) todos os nós abaixo de 'no'
-   - Ela faz isso recursivamente: primeiro esquerda,
-     depois direita, depois o próprio nó.
-*/
+//* libera_NO:
 void libera_NO(NO *no) {
     if (no == NULL) return;
 
@@ -122,11 +117,7 @@ void libera_NO(NO *no) {
     free(no);           // libera o nó atual
 }
 
-/* libera_ArvBin:
-   - Recebe a "árvore" (ponteiro para a raiz)
-   - Chama libera_NO pra limpar todos os nós
-   - Depois libera a própria raiz (o ponteiro ArvBin *)
-*/
+//* libera_ArvBin:
 void libera_ArvBin(ArvBin *raiz) {
     if (raiz == NULL) return;
     libera_NO(*raiz);  // libera todos os nós da árvore
